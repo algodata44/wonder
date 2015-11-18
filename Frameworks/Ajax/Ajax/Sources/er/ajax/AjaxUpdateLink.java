@@ -349,13 +349,16 @@ public class AjaxUpdateLink extends AjaxDynamicElement {
 				}
 				// appendTagAttributeToResponse(response, "onclick",
 				// onClick(context));
-				response.appendContentString(">");
+				if (button) 
+					response.appendContentString("/>");
+				else
+					response.appendContentString(">");
 			}
 			if (stringValue != null && !button) {
 				response.appendContentHTMLString(stringValue.toString());
 			}
 			appendChildrenToResponse(response, context);
-			if (renderTags) {
+			if (!button&&renderTags) {
 				response.appendContentString("</");
 				response.appendContentString(elementName);
 				response.appendContentString(">");
