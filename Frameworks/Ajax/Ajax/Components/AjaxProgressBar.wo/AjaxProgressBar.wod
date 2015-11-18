@@ -39,7 +39,7 @@ DoneConditional : WOConditional {
 CancelAction : AjaxUpdateLink {
 	updateContainerID = id;
 	action = cancel;
-	class = "cancelAction";
+	class = "cancelAction btn btn-default";
 	disabled = done;
 }
 
