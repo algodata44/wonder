@@ -503,7 +503,7 @@ public class ERIndex {
     private IndexReader _reader;
     private IndexSearcher _searcher;
     
-    private IndexReader indexReader() throws CorruptIndexException, IOException {
+    public IndexReader indexReader() throws CorruptIndexException, IOException {
         if (_reader == null) {
             _reader = IndexReader.open(indexDirectory(), true);
             //											  ^^^ readOnly
