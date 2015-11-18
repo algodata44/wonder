@@ -32,6 +32,10 @@ cat ../WebServerResources/sound.js           >> $UNCOMPRESSED
 
 cat ../WebServerResources/modalbox.js        >> $UNCOMPRESSED
 
+# AjaxGrid
+
+cat ../WebServerResources/AjaxGrid.js        >> $UNCOMPRESSED
+
 # wonder
 
 cat ../WebServerResources/wonder.js          >> $UNCOMPRESSED
