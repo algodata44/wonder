@@ -398,16 +398,18 @@ public class ERMailSender implements Runnable {
 						}
 					}
 					catch (AuthenticationFailedException e) {
-						log.error("Unable to connect to SMTP Transport. AuthenticationFailedException: " + e.getMessage() + " waiting 20 seconds", e);
-						Thread.sleep(20000);
+						//log.error("Unable to connect to SMTP Transport. AuthenticationFailedException: " + e.getMessage() + " waiting 20 seconds", e);
+						//Thread.sleep(20000);
+						log.error("Unable to connect to SMTP Transport. AuthenticationFailedException: " + e.getMessage() + " waiting 2 seconds", e);
+						Thread.sleep(2000);
 					}
 					catch (MessagingException e) {
 						if (e.getNextException() instanceof ConnectException) {
 							log.error("Can't connect to mail server, waiting");
 							Thread.sleep(10000);
 						} else if (e.getNextException() instanceof UnknownHostException) {
-							log.error("Can't find to mail server, exiting");
-							return;
+							log.error("Can't find to mail server " + stats().toString());
+							//return;
 						} else {
 							log.error("General mail error: " + e, e);
 						}
