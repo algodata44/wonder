@@ -347,7 +347,13 @@ var AjaxUpdateLink = {
 	
 	_update: function(id, actionUrl, options, elementID, queryParams) {
 		if (elementID) {
-			actionUrl = actionUrl.sub(/[^\/]+$/, elementID);
+			//Traitement pour les sites webadns
+			//il faut modifier l'adresse d'update
+			if (actionUrl.search(/&aj=([0-9\.]+)/)!=-1) {
+				actionUrl = actionUrl.replace(/&aj=([0-9\.]+)/, "&aj="+elementID);
+			} else {
+				actionUrl = actionUrl.sub(/[^\/]+$/, elementID);
+			}
 		}
 		actionUrl = actionUrl.addQueryParameters(queryParams);
 		if (options && options['_r']) {
