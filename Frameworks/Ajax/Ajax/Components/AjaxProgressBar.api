@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <wodefinitions>
-	<wo wocomponentcontent="false" class="AjaxProgressBar.java">
+	<wo class="AjaxProgressBar.java" wocomponentcontent="false">
 		<binding name="id"/>
 		<binding name="progressID"/>
 		<binding name="progress"/>
@@ -22,5 +22,6 @@
 		<binding name="visibleAfterDone"/>
 		<binding name="refreshTime"/>
 		<binding name="progressOfText"/>
+    <binding defaults="Boolean" name="bootstrap"/>
     </wo>
 </wodefinitions>
