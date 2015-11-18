@@ -48,7 +48,8 @@ public class ERXObjectStoreCoordinatorSynchronizer {
 	public static final Logger log = Logger.getLogger(ERXObjectStoreCoordinatorSynchronizer.class);
 
 	public static final String SYNCHRONIZER_KEY = "_synchronizer";
-
+	public static final Logger myLogger = Logger.getLogger("MyLogERXObjectStoreCoordinatorSynchronizer");
+	
 	private static ERXObjectStoreCoordinatorSynchronizer _synchronizer;
 	private static ThreadLocal _processingRemoteNotifications = new ThreadLocal();
 
@@ -506,23 +507,32 @@ public class ERXObjectStoreCoordinatorSynchronizer {
 				NSArray snapshots = (NSArray) changesByEntity.objectForKey(entityName);
 				EODatabaseContext dbc = (EODatabaseContext) dbcs.objectForKey(key);
 				if (dbc == null) {
+					try{
 					dbc = ERXEOAccessUtilities.databaseContextForEntityNamed(osc, entityName);
 					dbcs.setObjectForKey(dbc, key);
-				}
-				EODatabase database = dbc.database();
-				NSMutableDictionary snapshotsByGlobalID = new NSMutableDictionary();
-				for (Enumeration snapshotsEnumerator = snapshots.objectEnumerator(); snapshotsEnumerator.hasMoreElements();) {
-					NSDictionary snapshot = (NSDictionary) snapshotsEnumerator.nextElement();
-					EOGlobalID globalID = entity.globalIDForRow(snapshot);
-					snapshotsByGlobalID.setObjectForKey(snapshot, globalID);
-				}
-				if (snapshotsByGlobalID.count() > 0) {
-					dbc.lock();
-					try {
-						processor.processSnapshots(dbc, database, snapshotsByGlobalID, settings);
+					}catch(Exception e){
+						myLogger.debug("<-----------------------------------------------");
+						myLogger.debug("databaseContextForEntityNamed " + entityName);
+						myLogger.debug(e);
+						myLogger.debug("----------------------------------------------->");
 					}
-					finally {
-						dbc.unlock();
+				} 
+				if (dbc != null){
+					EODatabase database = dbc.database();
+					NSMutableDictionary snapshotsByGlobalID = new NSMutableDictionary();
+					for (Enumeration snapshotsEnumerator = snapshots.objectEnumerator(); snapshotsEnumerator.hasMoreElements();) {
+						NSDictionary snapshot = (NSDictionary) snapshotsEnumerator.nextElement();
+						EOGlobalID globalID = entity.globalIDForRow(snapshot);
+						snapshotsByGlobalID.setObjectForKey(snapshot, globalID);
+					}
+					if (snapshotsByGlobalID.count() > 0) {
+						dbc.lock();
+						try {
+							processor.processSnapshots(dbc, database, snapshotsByGlobalID, settings);
+						}
+						finally {
+							dbc.unlock();
+						}
 					}
 				}
 			}
@@ -617,6 +627,7 @@ public class ERXObjectStoreCoordinatorSynchronizer {
 							process(sender, _updateProcessor, localChange.updated(), EODatabaseContext.UpdatedKey);
 							process(sender, _invalidateProcessor, localChange.invalidated(), EODatabaseContext.InvalidatedKey);
 							publishRemoteChanges(_transactionID++, localChange);
+							localChange.clear();
 						}
 						else if (changes instanceof RemoteChange) {
 							processRemoteChange((RemoteChange) changes);
@@ -624,6 +635,8 @@ public class ERXObjectStoreCoordinatorSynchronizer {
 					}
 				}
 			} catch (Throwable e) {
+				e.printStackTrace();
+				System.err.println(ERXEC.outstandingLockDescription());
 				log.error(e, e);
 			}
 		}
@@ -722,6 +735,44 @@ public class ERXObjectStoreCoordinatorSynchronizer {
 					}
 				}
 			}
+		}
+		
+		public void  clear(){
+
+			if(_localCacheChanges!=null){
+				_localCacheChanges.clear();
+				_localCacheChanges =null;
+			}
+		
+			if( _coordinator!=null)
+				_coordinator=null;
+			
+			if( _inserted!=null){
+				if(_inserted instanceof NSMutableDictionary)
+					_inserted.clear();
+				_inserted=null;
+			}
+
+			
+			if( _updated!=null){
+				if(_updated instanceof NSMutableDictionary)
+					_updated.clear();
+				_updated=null;
+			}
+
+			if( _deleted!=null){
+				if(_deleted instanceof NSMutableDictionary)
+					_deleted.clear();
+				_deleted=null;
+			}
+			
+			if( _invalidated!=null){
+				if(_invalidated instanceof NSMutableDictionary)
+					_invalidated.clear();
+				_invalidated=null;
+			}
+			
+			
 		}
 
 		public boolean causedByRemoteUpdate() {
