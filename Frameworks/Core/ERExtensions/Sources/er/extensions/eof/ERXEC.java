@@ -123,7 +123,7 @@ public class ERXEC extends EOEditingContext {
 	 * from this EC's call to lock
 	 */
 	private Exception creationTrace;
-	NSMutableDictionary<Thread, NSMutableArray<Exception>> openLockTraces = new NSMutableDictionary<Thread, NSMutableArray<Exception>>();
+	transient NSMutableDictionary<Thread, NSMutableArray<Exception>> openLockTraces = new NSMutableDictionary<Thread, NSMutableArray<Exception>>();
 
 	/**
 	 * if traceOpenEditingContextLocks is true, this will contain
