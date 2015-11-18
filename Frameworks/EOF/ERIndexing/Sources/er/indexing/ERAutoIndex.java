@@ -30,6 +30,7 @@ import er.extensions.eof.ERXFetchSpecificationBatchIterator;
 import er.extensions.eof.ERXGenericRecord;
 import er.extensions.foundation.ERXArrayUtilities;
 import er.extensions.foundation.ERXStringUtilities;
+import er.extensions.foundation.ERXThreadStorage;
 
 /**
  * 
@@ -80,7 +81,7 @@ import er.extensions.foundation.ERXStringUtilities;
  */
 
 public class ERAutoIndex extends ERIndex {
-
+	public static final String DISABLE_indirectObjects_AUTOINDEXING_key = "DISABLE_indirectObjects_AUTOINDEXING";
     protected class ConfigurationEntry {
 
         public boolean active = false;
@@ -255,19 +256,21 @@ public class ERAutoIndex extends ERIndex {
                     inserted = ERXArrayUtilities.arrayMinusArray(inserted, directObjects);
                     addedHandledObjects.addObjectsFromArray(directObjects);
 
+                    boolean indexIndirectObject = ERXThreadStorage.valueForKey(DISABLE_indirectObjects_AUTOINDEXING_key) ==null;
+                    if(indexIndirectObject) {
                     NSArray<EOEnterpriseObject> indirectObjects;
-                    indirectObjects = indexableObjectsForObjects(EOEditingContext.UpdatedKey, updated);
-                    deletedHandledObjects.addObjectsFromArray(indirectObjects);
-                    addedHandledObjects.addObjectsFromArray(indirectObjects);
-
-                    indirectObjects = indexableObjectsForObjects(EOEditingContext.InsertedKey, inserted);
-                    deletedHandledObjects.addObjectsFromArray(indirectObjects);
-                    addedHandledObjects.addObjectsFromArray(indirectObjects);
-
-                    indirectObjects = indexableObjectsForObjects(EOEditingContext.DeletedKey, deleted);
-                    deletedHandledObjects.addObjectsFromArray(indirectObjects);
-                    addedHandledObjects.addObjectsFromArray(indirectObjects);
-
+	                    indirectObjects = indexableObjectsForObjects(EOEditingContext.UpdatedKey, updated);
+	                    deletedHandledObjects.addObjectsFromArray(indirectObjects);
+	                    addedHandledObjects.addObjectsFromArray(indirectObjects);
+	
+	                    indirectObjects = indexableObjectsForObjects(EOEditingContext.InsertedKey, inserted);
+	                    deletedHandledObjects.addObjectsFromArray(indirectObjects);
+	                    addedHandledObjects.addObjectsFromArray(indirectObjects);
+	
+	                    indirectObjects = indexableObjectsForObjects(EOEditingContext.DeletedKey, deleted);
+	                    deletedHandledObjects.addObjectsFromArray(indirectObjects);
+	                    addedHandledObjects.addObjectsFromArray(indirectObjects);
+                    }
                     deleteObjectsFromIndex(transaction, deletedHandledObjects.allObjects());
                     addObjectsToIndex(transaction, addedHandledObjects.allObjects());
 
