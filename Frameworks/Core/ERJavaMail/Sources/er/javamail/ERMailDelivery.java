@@ -222,7 +222,7 @@ public abstract class ERMailDelivery {
 		setMimeMessage(new MimeMessage(session()));
 	}
 
-	protected MimeMessage mimeMessage() {
+	public MimeMessage mimeMessage() {
 		return _mimeMessage;
 	}
 
@@ -529,7 +529,7 @@ public abstract class ERMailDelivery {
 	 * @return カレント MimeMessage のための ERMessage
 	 * </div>
 	 */
-	protected ERMessage buildMessage() {
+	public ERMessage buildMessage() {
 		ERMessage message = new ERMessage();
 		message.setDelegate(_delegate);
 		message.setUserInfo(_userInfo);
@@ -642,7 +642,7 @@ public abstract class ERMailDelivery {
 		}
 	}
 
-	protected void finishMessagePreparation() throws MessagingException {
+	public void finishMessagePreparation() throws MessagingException {
 		DataHandler messageDataHandler = prepareMail();
 
 		// Add all the attachements to the javamail message
