@@ -255,6 +255,14 @@ public class AjaxModalDialog extends AjaxComponent {
 		// it comes time to cache the context, it knows that this area is an Ajax updating area
 		AjaxUtils.setPageReplacementCacheKey(context, currentDialog._containerID(context));
 	}
+	
+	public static WOComponent update(WOContext context, String title,WOComponent component) {
+		AjaxModalDialog currentDialog = currentDialog(context);
+		WOComponent previous = currentDialog._actionResults;
+		currentDialog._actionResults=component;
+		update(context,title);
+		return previous;
+	}
 
 	/**
 	 * Call this method to have a JavaScript response returned that updates the contents of the modal dialog
