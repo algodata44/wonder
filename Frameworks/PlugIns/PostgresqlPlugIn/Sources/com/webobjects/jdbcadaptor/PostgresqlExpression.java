@@ -454,7 +454,9 @@ public class PostgresqlExpression extends JDBCExpression {
     @Override
     public String formatValueForAttribute(Object obj, EOAttribute eoattribute) {
         String value;
-        if(obj instanceof NSData) {
+        if (obj instanceof PostgresqlDateTimeFunctions) {
+			value = ((PostgresqlDateTimeFunctions) obj).toString();
+		} else if(obj instanceof NSData) {
             value = sqlStringForData((NSData)obj);
         } else if((obj instanceof NSTimestamp) && isTimestampAttribute(eoattribute)) {
             value = TIMESTAMP_FORMATTER.get().format(obj);
