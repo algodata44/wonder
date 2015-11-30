@@ -11820,6 +11820,18 @@ Modalbox.Methods = {
 Object.extend(Modalbox, Modalbox.Methods);
 
 if (Modalbox.overrideAlert) window.alert = Modalbox.alert;
+//----------------------------------------------//
+//	Created by: Romulo do Nascimento Ferreira	//
+//	Email: romulo.nf@gmail.com					//
+//----------------------------------------------//
+
+// NOTICE: This code may be used to any purpose without further
+// permission from the author. You may remove this notice from the
+// final code, however its appreciated if you keep the author name/email.
+// Email me if theres something needing improvement
+
+// Chuck Hill: Translated to English, made many improvements, error condition handling
+//             Moved functions into AjaxGrid object
 
 var AjaxGrid = {
 	isDragging : false,
@@ -11999,9 +12011,7 @@ var AjaxGrid = {
 	    return (e.nodeName.toLowerCase() == 'html')? null : e;
 	}
 
-}
-
-// $wi = the Wonder "lookup by ID" function
+}// $wi = the Wonder "lookup by ID" function
 var $wi = $;
  
 Object.extend(Prototype, {

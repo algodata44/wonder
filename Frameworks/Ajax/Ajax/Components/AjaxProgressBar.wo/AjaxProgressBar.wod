@@ -1,6 +1,7 @@
 ProgressUpdateContainer : AjaxUpdateContainer {
 	id = id;
 	action = refreshing;
+	class=^class;
 }
 
 HasStatusConditional : WOConditional {

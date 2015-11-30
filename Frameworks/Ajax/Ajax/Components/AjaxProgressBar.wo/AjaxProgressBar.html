@@ -1,4 +1,4 @@
-<wo:if condition = "$^bootstrap" negate = "$true">
+<wo:condition condition = "$^bootstrap" negate = "$true">
 	<webobject name = "ProgressUpdateContainer">
 		<webobject name = "FireStartedJavascriptEventsConditional">
 			<script>
@@ -8,16 +8,18 @@
 		<webobject name = "ProgressBarVisible">
 			<table class = "progressBarContainer">
 				<tr>
-					<td><table class = "progressBar" width = "100%" cellspacing = "0">
-								<tr>
-									<webobject name = "ProgressStartedConditional">
-										<webobject name = "Finished">&nbsp;</webobject>
-									</webobject>
-									<webobject name = "ProgressNotDoneConditional">
-										<webobject name = "Unfinished">&nbsp;</webobject>
-									</webobject>
-								</tr>
-							</table></td>
+					<td>
+						<table class = "progressBar" width = "100%" cellspacing = "0">
+							<tr>
+								<webobject name = "ProgressStartedConditional">
+									<webobject name = "Finished">&nbsp;</webobject>
+								</webobject>
+								<webobject name = "ProgressNotDoneConditional">
+									<webobject name = "Unfinished">&nbsp;</webobject>
+								</webobject>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				
 				<tr>
@@ -52,15 +54,15 @@
 			</webobject>
 			<webobject name = "NotDoneConditional">
 				<script>
-				setTimeout("<webobject name = "ID"/>Update()", <webobject name = "RefreshTime"/>);
+					setTimeout("<webobject name = "ID"/>Update()", <webobject name = "RefreshTime"/>);
 				</script>
 			</webobject>
 		</webobject>
 		<webobject name = "Contents"/>
 	</webobject>
-</wo:if>
+</wo:condition>
 
-<wo:else>
+<wo:condition condition = "$^bootstrap">
 	<webobject name = "ProgressUpdateContainer">
 		<webobject name = "FireStartedJavascriptEventsConditional">
 			<script>
@@ -69,7 +71,7 @@
 		</webobject>
 		
 		<webobject name = "ProgressBarVisible">
-			<wo:genericContainer elementName = "div" class="$^class">
+			<wo:genericContainer elementName = "div">
 				<strong>
 					<webobject name = "ProcedureStartedConditional">
 						<webobject name = "ProgressNotStartedConditional"><webobject name = "StartingText"/></webobject>
@@ -115,4 +117,4 @@
 		<webobject name = "Contents"/>
 		
 	</webobject>
-</wo:else>
+</wo:condition>
