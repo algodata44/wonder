@@ -393,6 +393,8 @@ var AjaxSubmitButton = {
 			actionUrl = actionUrl.addQueryParameters(queryParams);
 		}
 		actionUrl = actionUrl.sub('/wo/', '/ajax/', 1);
+		//réécriture pour le contexte webadns
+		actionUrl = actionUrl.sub('&wo=', '&aj=', 1);
 		if (id != null) {
 			if (options && options['_r']) {
 				actionUrl = actionUrl.addQueryParameters('_r=' + id);
