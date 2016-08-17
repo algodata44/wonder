@@ -1,6 +1,7 @@
 package er.extensions.foundation;
 
 import java.io.File;
+import java.util.UUID;
 
 import com.webobjects.foundation.NSMutableDictionary;
 
@@ -39,7 +40,7 @@ public class ERXFileRepository {
 	 * @return the new file
 	 */
 	public File createFile() {
-		return getFile(ERXRandomGUID.newGid());
+		return getFile(UUID.randomUUID().toString());
 	}
 	
 	/**
@@ -72,17 +73,6 @@ public class ERXFileRepository {
 	 * Holds the repositories.
 	 */
 	private static final NSMutableDictionary _repositories = ERXMutableDictionary.synchronizedDictionary();
-
-	/**
-	 * Returns the repository that is registered under the given name.
-	 * @param name the name under which the respository is registered
-	 * @return the repository that is registered under the given name or null
-	 * @deprecated use {@link #repository(String)} instead
-	 */
-	@Deprecated
-	public static ERXFileRepository respository(String name) {
-		return (ERXFileRepository) _repositories.objectForKey(name);
-	}
 
 	/**
 	 * Returns the repository that is registered under the given name.
