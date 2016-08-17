@@ -7,7 +7,3 @@ dist
 .DS_Store
 
 Frameworks/Misc/WOJRebel/manifest.mf
-
-Applications/BugTracker/BugTracker (create).launch
-
-Applications/BugTracker/BugTracker (create without drop).launch
