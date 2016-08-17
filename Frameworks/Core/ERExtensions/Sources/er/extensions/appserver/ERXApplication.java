@@ -2165,7 +2165,7 @@ public abstract class ERXApplication extends ERXAjaxApplication implements ERXGr
 		if (requestHandlingLog.isDebugEnabled()) {
 			requestHandlingLog.debug("Returning, encoding: " + response.contentEncoding() + " response: " + response);
 		}
-
+		
 		if (responseCompressionEnabled()) {
 			String contentType = response.headerForKey("content-type");
 			if (!"gzip".equals(response.headerForKey("content-encoding")) && (contentType != null) && (contentType.startsWith("text/") || responseCompressionTypes().containsObject(contentType))) {

@@ -1,0 +1,56 @@
+MoreURLCUtilities.o: ../Adaptor/MoreURLCUtilities.c
+	${CC} ${CFLAGS} -c ../Adaptor/MoreURLCUtilities.c
+Platform.o: ../Adaptor/Platform.c
+	${CC} ${CFLAGS} -c ../Adaptor/Platform.c
+WOURLCUtilities.o: ../Adaptor/WOURLCUtilities.c
+	${CC} ${CFLAGS} -c ../Adaptor/WOURLCUtilities.c
+WOURLCUtilities_3.o: ../Adaptor/WOURLCUtilities_3.c
+	${CC} ${CFLAGS} -c ../Adaptor/WOURLCUtilities_3.c
+appcfg.o: ../Adaptor/appcfg.c
+	${CC} ${CFLAGS} -c ../Adaptor/appcfg.c
+cfgparse.o: ../Adaptor/cfgparse.c
+	${CC} ${CFLAGS} -c ../Adaptor/cfgparse.c
+config.o: ../Adaptor/config.c
+	${CC} ${CFLAGS} -c ../Adaptor/config.c
+hostlookup.o: ../Adaptor/hostlookup.c
+	${CC} ${CFLAGS} -c ../Adaptor/hostlookup.c
+list.o: ../Adaptor/list.c
+	${CC} ${CFLAGS} -c ../Adaptor/list.c
+listing.o: ../Adaptor/listing.c
+	${CC} ${CFLAGS} -c ../Adaptor/listing.c
+loadaverage.o: ../Adaptor/loadaverage.c
+	${CC} ${CFLAGS} -c ../Adaptor/loadaverage.c
+loadbalancing.o: ../Adaptor/loadbalancing.c
+	${CC} ${CFLAGS} -c ../Adaptor/loadbalancing.c
+log.o: ../Adaptor/log.c
+	${CC} ${CFLAGS} -c ../Adaptor/log.c
+nbsocket.o: ../Adaptor/nbsocket.c
+	${CC} ${CFLAGS} -c ../Adaptor/nbsocket.c
+random.o: ../Adaptor/random.c
+	${CC} ${CFLAGS} -c ../Adaptor/random.c
+request.o: ../Adaptor/request.c
+	${CC} ${CFLAGS} -c ../Adaptor/request.c
+response.o: ../Adaptor/response.c
+	${CC} ${CFLAGS} -c ../Adaptor/response.c
+roundrobin.o: ../Adaptor/roundrobin.c
+	${CC} ${CFLAGS} -c ../Adaptor/roundrobin.c
+shmem.o: ../Adaptor/shmem.c
+	${CC} ${CFLAGS} -c ../Adaptor/shmem.c
+strdict.o: ../Adaptor/strdict.c
+	${CC} ${CFLAGS} -c ../Adaptor/strdict.c
+strtbl.o: ../Adaptor/strtbl.c
+	${CC} ${CFLAGS} -c ../Adaptor/strtbl.c
+transaction.o: ../Adaptor/transaction.c
+	${CC} ${CFLAGS} -c ../Adaptor/transaction.c
+transport.o: ../Adaptor/transport.c
+	${CC} ${CFLAGS} -c ../Adaptor/transport.c
+wastring.o: ../Adaptor/wastring.c
+	${CC} ${CFLAGS} -c ../Adaptor/wastring.c
+womalloc.o: ../Adaptor/womalloc.c
+	${CC} ${CFLAGS} -c ../Adaptor/womalloc.c
+xmlcparser.o: ../Adaptor/xmlcparser.c
+	${CC} ${CFLAGS} -c ../Adaptor/xmlcparser.c
+xmlctokenizer.o: ../Adaptor/xmlctokenizer.c
+	${CC} ${CFLAGS} -c ../Adaptor/xmlctokenizer.c
+xmlparse.o: ../Adaptor/xmlparse.c
+	${CC} ${CFLAGS} -c ../Adaptor/xmlparse.c
