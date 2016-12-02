@@ -113,6 +113,7 @@ public class AjaxSessionPing extends AjaxDynamicElement {
          * @return bare HTTP response with status set
          */
         public WOActionResults pingSessionAction() {
+        	System.err.println("TEST");
             ERXResponse response = new ERXResponse();
             if (existingSession() != null) {
                 session();
