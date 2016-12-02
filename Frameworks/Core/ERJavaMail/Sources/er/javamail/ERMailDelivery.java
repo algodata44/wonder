@@ -642,13 +642,8 @@ public abstract class ERMailDelivery {
 			// don't do anything.
 			return;
 		}
-<<<<<<< HEAD
-		NSMutableDictionary<String, String> newDictionary = new NSMutableDictionary<String, String>();
-		for (String key : mailAdresses) {
-=======
 		NSMutableDictionary<String, String> newDictionary = new NSMutableDictionary<>();
 		for (String key: mailAdresses) {
->>>>>>> wocommunity/master
 			newDictionary.takeValueForKey(addressesDictionary.objectForKey(key), key);
 		}
 		InternetAddress[] addresses = ERMailUtils.convertNSDictionaryToInternetAddresses(newDictionary.immutableClone(), charset());
