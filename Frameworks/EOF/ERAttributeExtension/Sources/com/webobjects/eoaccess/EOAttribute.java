@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.UUID;
 
 import org.apache.commons.lang3.CharEncoding;
 
@@ -1456,6 +1457,8 @@ public class EOAttribute extends EOProperty implements EOPropertyListEncoding, E
 			int currLength = 0;
 			Object primitiveValue;
 			try {
+				if (value instanceof UUID)
+					primitiveValue = value;
 				primitiveValue = adaptorValueByConvertingAttributeValue(value);
 			}
 			catch (Exception e) {

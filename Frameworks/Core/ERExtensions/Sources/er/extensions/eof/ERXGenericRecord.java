@@ -7,6 +7,7 @@
 package er.extensions.eof;
 
 import java.util.Objects;
+import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
@@ -778,6 +779,9 @@ public class ERXGenericRecord extends EOGenericRecord implements ERXGuardedObjec
 			EOAttribute primaryKeyAttribute = primaryKeyAttributes.objectAtIndex(0);			
 			String prototypeName = primaryKeyAttribute.prototypeName();
 			if (prototypeName != null && prototypeName.equals(uuidPrototypeName)) {
+				if (UUID.class.getSimpleName().equals(primaryKeyAttribute.className()) || UUID.class.getName().equals(primaryKeyAttribute.className())) 
+					return new NSDictionary<>(UUID.randomUUID(), primaryKeyAttribute.name());
+				
 				return new NSDictionary<>(UUIDUtilities.generateAsNSData(), primaryKeyAttribute.name());
 			}
 		}

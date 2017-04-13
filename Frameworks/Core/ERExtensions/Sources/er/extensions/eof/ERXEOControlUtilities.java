@@ -1350,7 +1350,7 @@ public class ERXEOControlUtilities {
                     if(attribute.adaptorValueType() == EOAttribute.AdaptorDateType && !(value instanceof NSTimestamp)) {
                         value = new NSTimestampFormatter("%Y-%m-%d %H:%M:%S %Z").parseObject((String)value);
                     }
-                    if(attribute.adaptorValueType() == EOAttribute.AdaptorBytesType && attribute.width() == 16 && !(value instanceof NSData)) {
+                    if((attribute.adaptorValueType() == EOAttribute.AdaptorBytesType || "uuid".equals(attribute.prototypeName())) && attribute.width() == 16 && !(value instanceof NSData)) {
                     	value = UUIDUtilities.decodeStringAsNSData((String)value);
                     }
                     value = attribute.validateValue(value);
@@ -1369,7 +1369,7 @@ public class ERXEOControlUtilities {
             	}
                 EOAttribute attribute = pks.objectAtIndex(0);
                 Object value = rawValue;
-                if(attribute.adaptorValueType() == EOAttribute.AdaptorBytesType && attribute.width() == 16 && !(value instanceof NSData)) {
+                if((attribute.adaptorValueType() == EOAttribute.AdaptorBytesType || "uuid".equals(attribute.prototypeName())) && attribute.width() == 16 && !(value instanceof NSData)) {
                 	value = UUIDUtilities.decodeStringAsNSData((String)value);
                 }
                 value = attribute.validateValue(value);
