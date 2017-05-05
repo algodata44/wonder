@@ -23,6 +23,13 @@
         }, 
         {
             columnName = ""; 
+            externalType = bool; 
+            name = booleanPostgres; 
+            valueClassName = NSNumber; 
+            valueType = c; 
+        }, 
+        {
+            columnName = ""; 
             externalType = varchar; 
             name = charFlag; 
             valueClassName = NSString; 
@@ -366,6 +373,15 @@
             name = uuid; 
             valueClassName = NSData; 
             width = 16; 
+        },
+        {
+            columnName = "uuid"; 
+            externalType = uuid;
+            name = uuidPostgres;
+            valueClassName = "java.util.UUID"; 
+            valueFactoryMethodName = fromString; 
+            adaptorValueConversionMethodName = toString;
+            factoryMethodArgumentType = EOFactoryMethodArgumentIsNSString;
         }
     ); 
     attributesUsedForLocking = (boolean, id, jodaDateTime); 
