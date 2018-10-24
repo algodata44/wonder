@@ -822,6 +822,16 @@ public class ERXGenericRecord extends EOGenericRecord implements ERXGuardedObjec
 	}
 
 	/**
+	 * Returns the committed snapshot value for given key.
+	 * 
+	 * @param key The key that you wish to get its value from the committed snapshot
+	 * @return the committed value
+	 */
+	public <T> T committedSnapshotValueForKey(ERXKey<T> key) {
+		return (T) committedSnapshotValueForKey(key.key());
+	}
+
+	/**
 	 * This method exists because
 	 * {@link com.webobjects.eocontrol.EOEditingContext#committedSnapshotForObject EOEditingContext.committedSnapshotForObject()}
 	 * gives unexpected results for newly inserted objects if
@@ -869,6 +879,16 @@ public class ERXGenericRecord extends EOGenericRecord implements ERXGuardedObjec
 	}
 
 	/**
+	 * Returns whether or not the given key has changed when compared to the committed snapshot.
+	 * 
+	 * @param key The key that you wish to check has changed from the committed snapshot
+	 * @return true if it has changed
+	 */
+	public <T> boolean hasKeyChangedFromCommittedSnapshot(ERXKey<T> key) {
+		return hasKeyChangedFromCommittedSnapshot(key.key());
+	}
+
+	/**
 	 * Returns whether or not the given key has changed from the given committed value.
 
 	 * @param key The key that you wish to check has changed from the committed snapshot
@@ -879,6 +899,18 @@ public class ERXGenericRecord extends EOGenericRecord implements ERXGuardedObjec
 	public boolean hasKeyChangedFromCommittedSnapshotFromValue(String key, Object oldValue) {
 		NSDictionary<String, Object> d = changesFromCommittedSnapshot();
 		return d.containsKey(key) && Objects.equals(oldValue, committedSnapshotValueForKey(key));
+	}
+
+	/**
+	 * Returns whether or not the given key has changed from the given committed value.
+
+	 * @param key The key that you wish to check has changed from the committed snapshot
+	 * @param oldValue The value you wish to see if the key has changed from EG. Has 'status' changed from
+	 *            STATUS.PENDING_STATUS
+	 * @return true if the specified key value has changed from the specified value
+	 */
+	public <T> boolean hasKeyChangedFromCommittedSnapshotFromValue(ERXKey<T> key, T oldValue) {
+		return hasKeyChangedFromCommittedSnapshotFromValue(key.key(), oldValue);
 	}
 
 	/**
@@ -896,6 +928,19 @@ public class ERXGenericRecord extends EOGenericRecord implements ERXGuardedObjec
 	}
 
 	/**
+	 * Returns whether or not the given key has changed from the given previous value to the new value since the committed value.
+	 * 
+	 * @param key The key that you wish to check has changed from the committed snapshot
+	 * @param oldValue The value you wish to see if the key has changed from
+	 * @param newValue The value you wish to see if the key has changed to EG. Has 'status' changed from
+	 *            STATUS.PENDING_STATUS to STATUS.CONFIRMED_STATUS
+	 * @return true if the specified key value has changed from the specified value
+	 */
+	public <T> boolean hasKeyChangedFromCommittedSnapshotFromValueToNewValue(ERXKey<T> key, T oldValue, T newValue) {
+		return hasKeyChangedFromCommittedSnapshotFromValueToNewValue(key.key(), oldValue, newValue);
+	}
+
+	/**
 	 * Returns whether or not the given key has changed to the new value since the committed value.
 	 * 
 	 * @param key The key that you wish to check has changed from the committed snapshot
@@ -906,6 +951,18 @@ public class ERXGenericRecord extends EOGenericRecord implements ERXGuardedObjec
 	public boolean hasKeyChangedFromCommittedSnapshotToValue(String key, Object newValue) {
 		NSDictionary<String, Object> d = changesFromCommittedSnapshot();
 		return d.containsKey(key) && Objects.equals(newValue, d.objectForKey(key));
+	}
+
+	/**
+	 * Returns whether or not the given key has changed to the new value since the committed value.
+	 * 
+	 * @param key The key that you wish to check has changed from the committed snapshot
+	 * @param newValue The value you wish to see if the key has changed to EG. Has 'status' changed to
+	 *            STATUS.CANCELLED_STATUS
+	 * @return true if the specified key value has changed to the specified value
+	 */
+	public <T> boolean hasKeyChangedFromCommittedSnapshotToValue(ERXKey<T> key, T newValue) {
+		return hasKeyChangedFromCommittedSnapshotToValue(key.key(), newValue);
 	}
 
 	public boolean parentObjectStoreIsObjectStoreCoordinator() {
