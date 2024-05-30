@@ -2184,7 +2184,7 @@ Ajax.PeriodicalUpdater = Class.create(Ajax.Base, {
 
   function remove(element) {
     element = $(element);
-    element.parentNode.removeChild(element);
+    if (element && element.parentNode) element.parentNode.removeChild(element);
     return element;
   }
 
